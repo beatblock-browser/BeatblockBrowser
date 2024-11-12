@@ -1,9 +1,29 @@
 <!-- Search Bar Start -->
 <div class="container mt-5">
-    <form class="d-flex" role="search" action="../search.html" method="GET">
+    <form class="d-flex" role="search" action="../search.html" method="GET" id="search-form">
         <input class="form-control me-2" type="search" placeholder="Search beat maps..." aria-label="Search"
                name="query" required>
+        <input type="hidden" name="filters" id="filters-input">
+
+        <button class="btn btn-outline-success me-2" type="button" id="filter-button" style="white-space: nowrap;">
+            Filters <span id="filter-count">[0]</span>
+        </button>
+            
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
+
+    <!-- Filters Dropdown (Initially Hidden) -->
+    <div id="filters-container" class="mt-2" style="display: none;">
+        <div id="genre-filters"></div>
+        <div id="difficulty-filters"></div>
+        <div id='popular-filters'></div>
+    </div>
+
+
+
 </div>
 <!-- Search Bar End -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+<script src="js/search_filters.js"></script>

@@ -170,3 +170,30 @@ body {
         text-align: right;
     }
 }
+
+
+.scrollable-list {
+    max-height: 150px;  /* Set maximum height */
+    overflow-y: auto;   /* Make the container scrollable */
+}
+
+/* Bootstrap grid layout for side-by-side display */
+#filters-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#genre-filters, #difficulty-filters {
+    flex: 1 1 50%; /* Take up 50% of the width */
+}
+
+.filters-container {
+    display: flex; /* Use flexbox to arrange children in a row */
+    flex-wrap: wrap; /* Allow wrapping if there are too many filters */
+    gap: 10px; /* Add some space between filters */
+}
+
+#genre-filters, #difficulty-filters {
+    flex: 1; /* Make both containers take equal width */
+    min-width: 200px; /* Minimum width to maintain readability */
+}
