@@ -1,0 +1,36 @@
+<div id="search-result" class="col-md-6">
+    <div class="card custom-card text-white position-relative">
+        <!-- Thumbnail Image as Background -->
+        <img src="https://via.placeholder.com/600x400" class="card-img" alt="Beat Map Thumbnail">
+
+        <!-- Overlay Content -->
+        <div class="card-img-overlay d-flex flex-column justify-content-end overlay-content">
+            <h5 class="card-title">Beat Map Title</h5>
+            <p><strong>Artist: </strong><span class="card-text"></span></p>
+            <p><strong>Mapper: </strong><span class="card-text"></span></p>
+            <p><strong>Difficulty: </strong><span class="card-text"></span></p>
+
+            <!-- Buttons Container -->
+            <div class="mt-3 d-flex align-items-center">
+                <!-- Play Button -->
+                <button type="button" class="btn btn-primary me-2 oneclick slow-loader" disabled>OneClick</button>
+                <a href="#" class="btn btn-secondary me-2" download>Manual</a>
+
+                <!-- Upvote Button -->
+                <button type="button"
+                        class="btn btn-outline-light upvote-button d-flex align-items-center justify-content-center slow-loader" disabled>
+                    <span class="bi bi-hand-thumbs-up-fill upvote-count">0</span>
+                </button>
+
+                <!-- Delete Button -->
+                <button type="button"
+                        class="btn btn-danger delete-button ms-auto invisible"
+                        aria-label="Delete Level"
+                        data-bs-toggle="modal"
+                        data-bs-target="#confirmDeleteModal">
+                    <span class="bi bi-x">Delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

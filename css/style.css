@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+    margin: 0;
+    font-family: Arial, sans-serif; /* Choose your preferred font */
+}
+
+.content {
+    flex: 1;
+}
+
+.login-container {
+    margin-top: 100px; /* Top margin for vertical centering */
+}
+
+.custom-card {
+     position: relative;
+     overflow: hidden;
+     height: 300px; /* Adjust as needed */
+ }
+
+.custom-card .card-img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.custom-card:hover .card-img {
+    transform: scale(1.05); /* Optional: Adds a zoom effect on hover */
+}
+
+.overlay-content {
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay for readability */
+    padding: 20px;
+    /*border-radius: 0 0 15px 15px; /* Optional: Rounded corners at the bottom */
+}
+
+/* Ensure Consistent Card Height on Smaller Screens */
+@media (max-width: 767.98px) {
+    .custom-card {
+        height: 400px; /* Increase height for better visibility */
+    }
+}
+
+.upvote-button i {
+    font-size: 1.2rem; /* Adjust icon size */
+}
+
+.upvote-count {
+    font-size: 1rem; /* Adjust count size */
+    line-height: 1; /* Ensure vertical alignment */
+}
+
+/* Hover Effects */
+.upvote-button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+    transform: translateY(-2px); /* Slight upward movement on hover */
+}
+
+.delete-button:hover {
+    background-color: #dc3545; /* Darker red on hover */
+    color: #fff;
+}
+
+/* Style for the error message */
+.error-message {
+    position: fixed; /* Makes the div float over the content */
+    top: 20px;       /* Distance from the top */
+    right: 5%;     /* Distance from the right */
+    left: 5%;
+    width: 90%;
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24;            /* Dark red text */
+    border: 1px solid #f5c6cb; /* Red border */
+    border-radius: 4px;        /* Rounded corners */
+    padding: 15px 20px;        /* Padding inside the box */
+    z-index: 1000;             /* Ensures it appears above other elements */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    opacity: 1;                /* Full opacity */
+    transition: opacity 0.5s ease-out, top 0.5s ease-out; /* Smooth transition for fade-out */
+}
+
+/* Fade-out effect */
+.error-message.fade-out {
+    opacity: 0;
+    top: 0px; /* Optional: Move the message up as it fades out */
+}
+
+/* Fixed Footer Styling */
+.footer {
+    background-color: #f2f2f2; /* Light grey background */
+    padding: 20px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    padding: 20px;
+    padding-bottom: 80px; /* Height of the footer + some extra space */
+}
+
+.footer .container {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* DMCA Info Styling */
+.footer .dmca-info {
+    margin-bottom: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #333;
+}
+
+.footer .dmca-info a {
+    color: #007BFF; /* Bootstrap primary color or choose your own */
+    text-decoration: none;
+}
+
+.footer .dmca-info a:hover {
+    text-decoration: underline;
+}
+
+/* Ko-fi Link Styling */
+.footer .ko-fi-link a img {
+    height: 36px; /* Adjust size as needed */
+    transition: transform 0.3s;
+}
+
+.footer .ko-fi-link a img:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer .dmca-info {
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .footer .ko-fi-link {
+        text-align: right;
+    }
+}
