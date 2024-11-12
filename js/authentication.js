@@ -66,7 +66,7 @@ const signalPromise = new Promise((resolve) => {
 });
 
 var authState = null;
-var eventFired = false;
+
 // Authentication State Listener
 onAuthStateChanged(auth, async (user) => {
     authState = user; // Update the authState variable
@@ -74,15 +74,16 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 document.addEventListener('FinishInline', async () => {
-    eventFired = true; // Update the eventFired variable
     await setupNavbar(); // Check if the auth state is known
 });
 
 async function setupNavbar() {
-    if (authState !== null && eventFired) {
+    if (window.fired) {
         const loginNavLink = document.getElementById('loginNavLink');
         const uploadNavLink = document.getElementById('uploadNavLink');
         const accountNavLink = document.getElementById('accountNavLink');
+        const signOutNavLink = document.getElementById('signOutNavLink');
+
         if (authState) {
             console.log('User is signed in:', authState);
             // Hide "Log In" link
@@ -90,6 +91,8 @@ async function setupNavbar() {
             // Show "Upload" and "Account" links
             uploadNavLink.classList.remove('d-none');
             accountNavLink.classList.remove('d-none');
+            signOutNavLink.classList.remove('d-none');
+            signOutNavLink.onclick = handleSignOut;
             await resolveSignal();
         } else {
             console.log('No user is signed in.');
@@ -98,9 +101,18 @@ async function setupNavbar() {
             // Hide "Upload" and "Account" links
             uploadNavLink.classList.add('d-none');
             accountNavLink.classList.add('d-none');
+            signOutNavLink.classList.add('d-none');
             await resolveSignal();
         }
     }
+}
+
+async function handleSignOut() {
+    // Remove authentication token from localStorage
+    await auth.signOut();
+
+    // Redirect to the homepage or login page
+    window.location.href = '../index.html';
 }
 
 export async function runLoggedIn(ifLoggedIn, otherwise = () => showError('This action requires being signed in!')) {

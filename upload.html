@@ -16,15 +16,25 @@
 
 <!-- Upload Form Container -->
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">Upload Your BeatMap</h2>
+    <h2 class="mb-3 text-center">Upload Your BeatMap</h2>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div id="search-result-template-long"></div>
+            <br>
+            <div>
+                Upload Rules:<br>
+                - Levels must be of your own creation<br>
+                - Mark levels that could trigger epilepsy<br>
+                - Credit creators of used assets<br>
+                - No physically harmful sounds, such as extremely loud songs<br>
+                - Any non-song files (such as code) are not allowed<br>
+                - Songs from artists on the artist blacklist are not allowed<br>
+                <br>
+            </div>
             <!-- Upload Form -->
             <form id="uploadForm" enctype="multipart/form-data">
                 <!-- BeatMap File Upload -->
                 <div class="mb-3">
-                    <label for="beatmap" class="form-label">Upload BeatMap (ZIP format)</label>
                     <input class="form-control" type="file" id="beatmap" name="beatmap" accept=".zip" required>
                 </div>
 
