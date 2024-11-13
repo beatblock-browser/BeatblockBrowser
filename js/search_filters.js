@@ -3,7 +3,7 @@ $(document).ready(function() {
     const filters = {
         genre: ['Jump','Stream','Stamina','Tech'], 
         difficulty: ['Easy', 'Hard','Apocrypha'], 
-        popular: ['5 Likes+', "10 Likes+", "etc"]
+        popular: ['New', "Weekly", "Monthly","All-Time"]
     };
 
     // Dynamically create genre label and checkboxes
