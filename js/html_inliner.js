@@ -63,7 +63,7 @@ function addPaginationToContent() {
 
     // Function to show the current page and hide others
     function showPage(pageNum) {
-        console.log(`Showing page: ${pageNum}`);
+        //console.log(`Showing page: ${pageNum}`); // Debug
         contentSections.removeClass('visible'); // Hide all content sections
         contentSections.eq(pageNum - 1).addClass('visible'); // Show the current page
         pageNumber.text(`Page ${pageNum}`);
