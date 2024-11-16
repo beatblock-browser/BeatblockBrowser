@@ -10,6 +10,7 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script><link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css" media="screen"/>
     <script src="js/html_inliner.js"></script>
 </head>
 <body>
@@ -25,9 +26,11 @@
                 <button id="googleSignInBtn" class="btn btn-google btn-lg w-100 mb-3 google-btn">
                     <i class="bi bi-google me-2"></i> Sign in with Google
                 </button>
-                <button id="discordSignInBtn" class="btn btn-google btn-lg w-100 mb-3 google-btn">
+                <a href="https://discord.com/oauth2/authorize?client_id=1298420686087262269&redirect_uri=https%3A%2F%2Fbeatblockbrowser.me%2Fapi%2Fdiscordauth&response_type=code&scope=identify">
+                <button id="discordSignInBtn" class="btn btn-lg w-100 mb-3 discord-login-btn">
                     <i class="bi bi-discord me-2"></i> Sign in with Discord
                 </button>
+                </a>
                 <!-- Error Message -->
                 <div id="error-message" class="alert alert-danger invisible" role="alert">
                     <!-- Error messages will appear here -->
