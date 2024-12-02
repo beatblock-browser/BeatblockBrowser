@@ -44,7 +44,7 @@ if (googleSignInBtn != null) {
                 console.log('User signed in:', user);
                 localStorage.setItem('authToken', await sendRequest(`/api/googleauth/${firebaseToken}`, null));
                 // Redirect to home page or dashboard
-                window.location.href = 'index.html';
+                //window.location.href = 'index.html';
             }
         } catch (error) {
             // Handle Errors here.
@@ -149,7 +149,7 @@ async function handleSignOut() {
     localStorage.removeItem("authToken");
 
     // Redirect to the homepage or login page
-    window.location.href = '../index.html';
+    window.location.href = 'index.html';
 }
 
 export async function runLoggedIn(ifLoggedIn, otherwise = () => showError('This action requires being signed in!')) {
