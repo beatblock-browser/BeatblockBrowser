@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Discord OAuth Callback</title>
+</head>
+<body>
+<script>
+    // Extract the code from the URL
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+
+    if (code) {
+        // Send the code back to the opener window
+        window.opener.postMessage({ code }, window.location.origin);
+
+        // Optionally, close the popup
+        window.close();
+    } else {
+        console.error('No authorization code found.');
+    }
+</script>
+</body>
+</html>

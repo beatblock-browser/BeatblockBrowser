@@ -11,8 +11,8 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
     try {
         const formData = new FormData(uploadForm);
 
-        if (formData.get('beatmap').size > 20000000) {
-            showError('ZIP size over 20MB limit.');
+        if (formData.get('beatmap').size > 2000000) {
+            showError('ZIP size over 2MB limit.');
             submitButton.disabled = false;
             submitButton.textContent = 'Upload';
             return
@@ -24,7 +24,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
                 method: 'POST',
                 body: formData
             });
-            const result = await response.text();
+            const result = await response.json();
 
             if (response.ok) {
                 uploadForm.reset();

@@ -1,7 +1,7 @@
 // Function to handle upvoting
-import {runLoggedIn, showError} from "./authentication.js";
+import {runLoggedIn, sendRequest, showError} from "./authentication.js";
 import {downloadMap, removeMap} from "./oneclick_communicator.js";
-import {updateSongData, makeDownloadButton, makeUpvoteButton, deleteMap, getUser, ADMINS} from "./songdata.js";
+import {updateSongData, updateSongCard, getUser, ADMINS} from "./songdata.js";
 
 // Function to display search results
 async function displaySearchResults() {
@@ -13,43 +13,12 @@ async function displaySearchResults() {
         // Show a loading indicator (optional)
         resultsContainer.innerHTML = '<p>Loading results...</p>';
 
-        // Initialize the resolver outside the functions to make it accessible to both
-        let finishSearchResolve;
-
-        // Create a Promise that Function A will await
-        const finishedSearch = new Promise((resolve) => {
-            finishSearchResolve = resolve;
-        });
-
-        let upvoted_list = runLoggedIn((id) => updateSongData(id, finishedSearch), () => {})
-
-        // Fetch data from the /api/search endpoint
-        let response;
-        try {
-            response = await fetch(`/api/search${window.location.search}`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-        } catch (e) {
-            console.log(e);
+        const searchResult = await sendRequest(`/api/search/${new URLSearchParams(window.location.search).get('query')}`, null);
+        if (!searchResult) {
+            return;
         }
 
-        if (response != null && response.status === 429) {
-            resultsContainer.innerHTML = '';
-            showError('Please stop spamming search requests!');
-            return
-        }
-
-        if (response == null || !response.ok) {
-            resultsContainer.innerHTML = '';
-            showError('Failed to search, see console log');
-            return
-        }
-
-        const searchResult = await response.json();
-        document.getElementById('search-query').textContent = searchResult.query;
+        document.getElementById('search-query').textContent = decodeURIComponent(searchResult.query);
         const beatMaps = searchResult.results;
 
         // Clear previous results
@@ -59,26 +28,7 @@ async function displaySearchResults() {
             beatMaps.forEach(map => {
                 // Clone the template
                 const clone = template.content.cloneNode(true);
-                clone.querySelector('.card').classList.add("map-" + map.id.id['String']);
-                // Populate the clone with actual data
-                clone.querySelector('.card-title').textContent = map.song;
-                clone.querySelectorAll('.card-text')[0].textContent = map.artist;
-                clone.querySelectorAll('.card-text')[1].textContent = map.charter;
-                clone.querySelectorAll('.card-text')[2].textContent = map.difficulties.map(d => d.display).join(", ");
-                if (map.image != null) {
-                    clone.querySelector('img').src = 'output/' + map.image;
-                } else {
-                    clone.querySelector('img').src = 'beatblocks.jpg';
-                }
-                clone.querySelector('a.btn').href = 'output/' + map.download;
-                makeDownloadButton(clone.querySelector('.oneclick'), map.id.id['String']);
-                clone.querySelector('.oneclick').disabled = true;
-
-                clone.querySelector('.upvote-count').textContent = map.upvotes;
-                makeUpvoteButton(clone.querySelector('.upvote-button'), map.id.id['String']);
-                clone.querySelector('.upvote-button').disabled = true;
-                clone.querySelector('.delete-button').onclick = async () => await deleteMap(map.id.id['String']);
-
+                updateSongCard(clone, map);
                 // Append the clone to the results container
                 resultsContainer.appendChild(clone);
             });
@@ -88,9 +38,12 @@ async function displaySearchResults() {
             resultsContainer.innerHTML = '';
         }
 
-        finishSearchResolve()
-        await upvoted_list;
-        if (ADMINS.includes((await getUser()).id.id['String'])) {
+        let user = await getUser();
+        if (user == null) {
+            return;
+        }
+        updateSongData(user)
+        if (ADMINS.includes(user.id)) {
             document.querySelectorAll('.delete-button').forEach((element) => element.classList.remove('invisible'));
         }
     } catch (error) {
