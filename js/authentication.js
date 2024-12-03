@@ -44,7 +44,7 @@ if (googleSignInBtn != null) {
                 console.log('User signed in:', user);
                 localStorage.setItem('authToken', await sendRequest(`/api/googleauth/${firebaseToken}`, null));
                 // Redirect to home page or dashboard
-                //window.location.href = 'index.html';
+                window.location.href = 'index.html';
             }
         } catch (error) {
             // Handle Errors here.
